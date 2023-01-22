@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { technologiesItemAnimation } from "@/utils/indexAnimations";
 
 type Props = {
   color?: string;
@@ -10,7 +9,7 @@ type Props = {
 function TailwindLogo({ color, withAnimation }: Props) {
   return (
     <motion.svg
-      variants={withAnimation ? technologiesItemAnimation : undefined}
+      variants={withAnimation ? undefined : undefined}
       width="100"
       height="100"
       viewBox="0 0 100 100"

@@ -1,10 +1,11 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 type Props = {
-  color?: "#FFFFFF" | "#191B22";
+  isOpen: boolean;
 };
 
-function ArrowIcon({ color }: Props) {
+function ArrowIcon({ isOpen }: Props) {
   return (
     <svg
       width="20"
@@ -13,9 +14,15 @@ function ArrowIcon({ color }: Props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
+      <motion.path
+        animate={{
+          stroke: isOpen ? "#191B22" : "#FFFFFF",
+          transition: {
+            type: "spring",
+            delay: isOpen ? 0 : 0.5,
+          },
+        }}
         d="M10.6923 1L19 9.5L10.6923 18M17.8462 9.5H1"
-        stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -23,9 +30,5 @@ function ArrowIcon({ color }: Props) {
     </svg>
   );
 }
-
-ArrowIcon.defaultProps = {
-  color: "#FFFFFF",
-};
 
 export default ArrowIcon;

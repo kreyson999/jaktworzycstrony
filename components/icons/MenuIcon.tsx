@@ -1,10 +1,11 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 type Props = {
-  color?: "#FFFFFF" | "#191B22";
+  isOpen: boolean;
 };
 
-function MenuIcon({ color }: Props) {
+function MenuIcon({ isOpen }: Props) {
   return (
     <svg
       width="44"
@@ -13,9 +14,15 @@ function MenuIcon({ color }: Props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
+      <motion.path
+        animate={{
+          stroke: isOpen ? "#191B22" : "#FFFFFF",
+          transition: {
+            type: "spring",
+            delay: isOpen ? 0 : 0.5,
+          },
+        }}
         d="M1 1H43M1 12.5H43M1 24H43"
-        stroke={color}
         strokeWidth="2"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -23,9 +30,5 @@ function MenuIcon({ color }: Props) {
     </svg>
   );
 }
-
-MenuIcon.defaultProps = {
-  color: "#FFFFFF",
-};
 
 export default MenuIcon;

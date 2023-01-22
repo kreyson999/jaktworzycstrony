@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useCycle, Variants } from "framer-motion";
 import MenuIcon from "@/components/icons/MenuIcon";
 import ArrowIcon from "@/components/icons/ArrowIcon";
 import NavLink from "@/components/NavLink";
@@ -13,56 +12,85 @@ import SectionHeader from "@/components/SectionHeader";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import CourseModule from "@/components/CourseModule";
 import OfferContainer from "@/components/OfferContainer";
-import {
-  headingTextAnimation,
-  headingTextItemAnimation,
-  modernTechnologiesAnimation,
-  sectionVariants,
-  technologiesAnimation,
-} from "@/utils/indexAnimations";
+
+const navbarBg: Variants = {
+  open: {
+    height: "100vh",
+    clipPath: "circle(100.0% at 50% 30%)",
+  },
+  closed: {
+    height: "0",
+    clipPath: "circle(10% at 0% 0%)",
+    transition: {
+      delay: 0.6,
+      type: "tween",
+    },
+  },
+};
+
+const navbarList: Variants = {
+  open: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+  closed: {
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
+};
 
 export default function Home() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
-
-  const handleToggleNavBar = () => {
-    setIsNavOpen((state) => !state);
-  };
+  const [isNavOpen, toggleOpen] = useCycle(false, true);
 
   return (
     <>
-      <div
-        className={`fixed px-2 py-4 w-full z-20 flex flex-col ${
-          isNavOpen ? "h-[100vh] w-[100vw] bg-blue-100 md:bg-transparent" : ""
-        }`}
+      <motion.div
+        initial={false}
+        animate={isNavOpen ? "open" : "closed"}
+        className="fixed w-full z-20 flex flex-col"
       >
-        <div className="container mx-auto grow flex flex-col">
+        <motion.div
+          variants={navbarBg}
+          className="absolute w-full bg-blue-100"
+        />
+        <div className="absolute container px-2 py-4 sm:mx-auto grow flex flex-col">
           <div className="flex items-center justify-between">
-            <button onClick={handleToggleNavBar} type="button">
-              <MenuIcon color={isNavOpen ? "#191B22" : "#FFFFFF"} />
+            <button onClick={() => toggleOpen()} type="button">
+              <MenuIcon isOpen={isNavOpen} />
             </button>
-            <button
+            <motion.button
+              animate={{
+                color: isNavOpen ? "#191B22" : "#FFFFFF",
+                transition: {
+                  type: "spring",
+                  delay: isNavOpen ? 0 : 0.5,
+                },
+              }}
               type="button"
               className={`flex font-semibold space-x-2 ${
                 isNavOpen ? "text-blue-900" : ""
               }`}
             >
               <span>Zacznij naukę już teraz</span>
-              <ArrowIcon color={isNavOpen ? "#191B22" : "#FFFFFF"} />
-            </button>
+              <ArrowIcon isOpen={isNavOpen} />
+            </motion.button>
           </div>
-          <nav
-            className={`${
-              isNavOpen ? "grid md:flex" : "hidden"
-            } text-center md:text-left grow md:flex-col gap-2 sm:gap-4 place-content-center`}
+          <motion.nav
+            variants={navbarList}
+            className="h-screen grid text-center md:text-left grow md:flex-col gap-2 sm:gap-4 place-content-center"
           >
             <NavLink title="Logowanie" href="test" />
             <NavLink title="Rejestracja" href="test" />
             <NavLink title="Regulamin" href="test" />
             <NavLink title="Prywatność" href="test" />
             <NavLink title="Reklamacje" href="test" />
-          </nav>
+          </motion.nav>
         </div>
-      </div>
+      </motion.div>
       <div
         className={`bg-blue-900 min-h-[100vh] md:fixed md:transition-transform ${
           isNavOpen
@@ -71,35 +99,15 @@ export default function Home() {
         } md:left-0 md:top-0 md:bottom-0 overflow-y-auto overflow-x-hidden md:w-[100vw]`}
       >
         <header className="mt-32 xl:mt-36 mb-24 xl:mb-28 flex flex-col items-center">
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={headingTextAnimation}
-            className="container text-center sm:max-w-[600px] md:max-w-[760px] lg:max-w-[1000px] xl:max-w-[1250px] 2xl:max-w-[1500px] sm:text-left mx-auto px-2 flex flex-col font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-11xl"
-          >
-            <motion.span variants={headingTextItemAnimation}>
-              Jak <span className="text-green-400">budować</span>
+          <motion.h1 className="container text-center sm:max-w-[600px] md:max-w-[760px] lg:max-w-[1000px] xl:max-w-[1250px] 2xl:max-w-[1500px] sm:text-left mx-auto px-2 flex flex-col font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-11xl">
+            <motion.span>
+              Jak <span className="text-green-400">tworzyć</span>
             </motion.span>
-            <motion.span
-              variants={headingTextItemAnimation}
-              className="sm:ml-6 text-blue-400"
-            >
-              strony
-            </motion.span>
-            <motion.span
-              variants={headingTextItemAnimation}
-              className="sm:self-end"
-            >
-              internetowe.
-            </motion.span>
+            <motion.span className="sm:ml-6 text-blue-400">strony</motion.span>
+            <motion.span className="sm:self-end">internetowe?</motion.span>
           </motion.h1>
           <div className="mt-24 relative w-[100vw] overflow-y-hidden overflow-x-hidden flex flex-col items-center">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={technologiesAnimation}
-              className="w-[125vw] flex space-x-2 md:space-x-4 lg:space-x-6 xl:space-x-8 justify-center"
-            >
+            <motion.div className="w-[125vw] flex space-x-2 md:space-x-4 lg:space-x-6 xl:space-x-8 justify-center">
               <ReactLogo />
               <ReactRouterLogo />
               <TailwindLogo />
@@ -108,13 +116,7 @@ export default function Home() {
             </motion.div>
           </div>
         </header>
-        <motion.p
-          initial="offscreen"
-          whileInView="onscreen"
-          variants={sectionVariants}
-          viewport={{ once: true, amount: 0.85 }}
-          className="container mx-auto px-2 font-semibold text-lg text-center sm:text-xl lg:text-2xl 2xl:text-3xl"
-        >
+        <motion.p className="container mx-auto px-2 font-semibold text-lg text-center sm:text-xl lg:text-2xl 2xl:text-3xl">
           Kurs tłumaczy,{" "}
           <span className="text-yellow-400">
             w jaki sposób budować zaawansowane strony internetowe oraz jak
@@ -131,13 +133,7 @@ export default function Home() {
             highlightedText="technologie"
           />
           <div className="max-w-screen-lg mx-auto flex flex-col">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              variants={modernTechnologiesAnimation}
-              viewport={{ once: true, amount: 0.2 }}
-              className="grid place-content-center sm:flex sm:flex-wrap gap-6 sm:gap-2 sm:gap-y-8 lg:gap-y-16"
-            >
+            <motion.div className="grid place-content-center sm:flex sm:flex-wrap gap-6 sm:gap-2 sm:gap-y-8 lg:gap-y-16">
               <TechnologyItem
                 logo={<ReactLogo withAnimation={false} color="#8B52D3" />}
                 title="React"
