@@ -1,15 +1,12 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 type Props = {
   color?: string;
-  withAnimation?: boolean;
 };
 
-function TailwindLogo({ color, withAnimation }: Props) {
+function TailwindLogo({ color }: Props) {
   return (
-    <motion.svg
-      variants={withAnimation ? undefined : undefined}
+    <svg
       width="100"
       height="100"
       viewBox="0 0 100 100"
@@ -37,13 +34,12 @@ function TailwindLogo({ color, withAnimation }: Props) {
           fill={color}
         />
       </g>
-    </motion.svg>
+    </svg>
   );
 }
 
 TailwindLogo.defaultProps = {
   color: "#6E727E",
-  withAnimation: true,
 };
 
 export default TailwindLogo;

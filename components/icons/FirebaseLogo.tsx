@@ -1,15 +1,12 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 type Props = {
   color?: string;
-  withAnimation?: boolean;
 };
 
-function FirebaseLogo({ color, withAnimation }: Props) {
+function FirebaseLogo({ color }: Props) {
   return (
-    <motion.svg
-      variants={withAnimation ? undefined : undefined}
+    <svg
       width="100"
       height="100"
       viewBox="0 0 100 100"
@@ -55,13 +52,12 @@ function FirebaseLogo({ color, withAnimation }: Props) {
           <stop offset="1" stopColor="white" stopOpacity="0" />
         </linearGradient>
       </defs>
-    </motion.svg>
+    </svg>
   );
 }
 
 FirebaseLogo.defaultProps = {
   color: "#6E727E",
-  withAnimation: true,
 };
 
 export default FirebaseLogo;

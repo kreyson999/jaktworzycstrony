@@ -1,15 +1,12 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 type Props = {
   color?: string;
-  withAnimation?: boolean;
 };
 
-function ReactLogo({ color, withAnimation }: Props) {
+function ReactLogo({ color }: Props) {
   return (
-    <motion.svg
-      variants={withAnimation ? undefined : undefined}
+    <svg
       width="100"
       height="98"
       viewBox="0 0 100 98"
@@ -24,13 +21,12 @@ function ReactLogo({ color, withAnimation }: Props) {
         d="M49.9707 56C51.752 56.0054 53.4949 55.5116 54.9788 54.5809C56.4627 53.6503 57.6208 52.3247 58.3065 50.772C58.9922 49.2193 59.1746 47.5094 58.8306 45.8587C58.4867 44.2081 57.6318 42.6909 56.3743 41.4994C55.1168 40.3079 53.5132 39.4956 51.7666 39.1654C50.02 38.8351 48.2089 39.0018 46.5627 39.6444C44.9164 40.2869 43.5091 41.3763 42.5188 42.7747C41.5286 44.1732 41 45.8176 41 47.5C40.9975 48.6145 41.2277 49.7186 41.6773 50.7491C42.1268 51.7797 42.7871 52.7164 43.6202 53.5058C44.4533 54.2952 45.443 54.9218 46.5326 55.3497C47.6223 55.7777 48.7906 55.9987 49.9707 56Z"
         fill={color}
       />
-    </motion.svg>
+    </svg>
   );
 }
 
 ReactLogo.defaultProps = {
   color: "#6E727E",
-  withAnimation: true,
 };
 
 export default ReactLogo;

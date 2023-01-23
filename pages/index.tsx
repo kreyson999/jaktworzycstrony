@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useCycle, Variants } from "framer-motion";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 import MenuIcon from "@/components/icons/MenuIcon";
 import ArrowIcon from "@/components/icons/ArrowIcon";
 import NavLink from "@/components/NavLink";
@@ -12,59 +12,14 @@ import SectionHeader from "@/components/SectionHeader";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import CourseModule from "@/components/CourseModule";
 import OfferContainer from "@/components/OfferContainer";
-
-const navbarBg: Variants = {
-  open: {
-    height: "100vh",
-    clipPath: "circle(100.0% at 50% 30%)",
-  },
-  closed: {
-    height: "0",
-    clipPath: "circle(10% at 0% 0%)",
-    transition: {
-      delay: 0.6,
-      type: "tween",
-    },
-  },
-};
-
-const navbarList: Variants = {
-  open: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-  closed: {
-    transition: {
-      staggerChildren: 0.05,
-      staggerDirection: -1,
-    },
-  },
-};
-
-const headingTextList: Variants = {
-  visible: {
-    transition: {
-      staggerChildren: 0.25,
-      delayChildren: 0.5,
-    },
-  },
-};
-
-const headingText: Variants = {
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-    },
-  },
-  hidden: {
-    y: -30,
-    opacity: 0,
-  },
-};
+import {
+  headingText,
+  headingTextList,
+  modernTechnologiesList,
+  navbarBg,
+  navbarList,
+  sectionAnimation,
+} from "@/utils/indexAnimations";
 
 export default function Home() {
   const [isNavOpen, toggleOpen] = useCycle(false, true);
@@ -133,8 +88,6 @@ export default function Home() {
       >
         <header className="mt-32 xl:mt-36 mb-24 xl:mb-28 flex flex-col items-center">
           <motion.h1
-            initial="hidden"
-            animate="visible"
             variants={headingTextList}
             className="container text-center sm:max-w-[600px] md:max-w-[760px] lg:max-w-[1000px] xl:max-w-[1250px] 2xl:max-w-[1500px] sm:text-left mx-auto px-2 flex flex-col font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-11xl"
           >
@@ -151,17 +104,13 @@ export default function Home() {
               internetowe?
             </motion.span>
           </motion.h1>
-          <div className="mt-24 relative w-[100vw] overflow-y-hidden overflow-x-hidden flex flex-col items-center">
-            <motion.div className="w-[125vw] flex space-x-2 md:space-x-4 lg:space-x-6 xl:space-x-8 justify-center">
-              <ReactLogo />
-              <ReactRouterLogo />
-              <TailwindLogo />
-              <HygraphLogo />
-              <FirebaseLogo />
-            </motion.div>
-          </div>
         </header>
-        <motion.p className="container mx-auto px-2 font-semibold text-lg text-center sm:text-xl lg:text-2xl 2xl:text-3xl">
+        <motion.p
+          whileInView="visible"
+          initial="hidden"
+          variants={sectionAnimation}
+          className="container mx-auto px-2 font-semibold text-lg text-center sm:text-xl lg:text-2xl 2xl:text-3xl"
+        >
           Kurs tłumaczy,{" "}
           <span className="text-yellow-400">
             w jaki sposób budować zaawansowane strony internetowe oraz jak
@@ -178,29 +127,35 @@ export default function Home() {
             highlightedText="technologie"
           />
           <div className="max-w-screen-lg mx-auto flex flex-col">
-            <motion.div className="grid place-content-center sm:flex sm:flex-wrap gap-6 sm:gap-2 sm:gap-y-8 lg:gap-y-16">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              variants={modernTechnologiesList}
+              viewport={{ once: true, amount: 0.5 }}
+              className="grid place-content-center sm:flex sm:flex-wrap gap-6 sm:gap-2 sm:gap-y-8 lg:gap-y-16"
+            >
               <TechnologyItem
-                logo={<ReactLogo withAnimation={false} color="#8B52D3" />}
+                logo={<ReactLogo color="#8B52D3" />}
                 title="React"
                 desc="In justo massa, hendrerit id leo sit amet, suscipit hendrerit sapien. Nullam pharetra massa magna, et consectetur lectus venenatis sit amet."
               />
               <TechnologyItem
-                logo={<ReactRouterLogo withAnimation={false} color="#D35252" />}
+                logo={<ReactRouterLogo color="#D35252" />}
                 title="React Router"
                 desc="In justo massa, hendrerit id leo sit amet, suscipit hendrerit sapien. Nullam pharetra massa magna, et consectetur lectus venenatis sit amet."
               />
               <TechnologyItem
-                logo={<TailwindLogo withAnimation={false} color="#529DD3" />}
+                logo={<TailwindLogo color="#529DD3" />}
                 title="Tailwind CSS"
                 desc="In justo massa, hendrerit id leo sit amet, suscipit hendrerit sapien. Nullam pharetra massa magna, et consectetur lectus venenatis sit amet."
               />
               <TechnologyItem
-                logo={<HygraphLogo withAnimation={false} color="#D352BE" />}
+                logo={<HygraphLogo color="#D352BE" />}
                 title="Hygraph"
                 desc="In justo massa, hendrerit id leo sit amet, suscipit hendrerit sapien. Nullam pharetra massa magna, et consectetur lectus venenatis sit amet."
               />
               <TechnologyItem
-                logo={<FirebaseLogo withAnimation={false} color="#D3B752" />}
+                logo={<FirebaseLogo color="#D3B752" />}
                 title="Firebase"
                 desc="In justo massa, hendrerit id leo sit amet, suscipit hendrerit sapien. Nullam pharetra massa magna, et consectetur lectus venenatis sit amet."
               />

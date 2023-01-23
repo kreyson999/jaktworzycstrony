@@ -1,15 +1,12 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 type Props = {
   color?: string;
-  withAnimation?: boolean;
 };
 
-function ReactRouterLogo({ color, withAnimation }: Props) {
+function ReactRouterLogo({ color }: Props) {
   return (
-    <motion.svg
-      variants={withAnimation ? undefined : undefined}
+    <svg
       width="100"
       height="100"
       viewBox="0 0 100 100"
@@ -32,13 +29,12 @@ function ReactRouterLogo({ color, withAnimation }: Props) {
         d="M89.5788 82.9998C83.7868 83.0321 79.0328 78.3476 79.0002 72.5788C78.9679 66.7868 83.6525 62.0328 89.4212 62.0002C95.2132 61.9679 99.9673 66.6524 99.9998 72.4212C100.032 78.2085 95.3476 82.9672 89.5788 82.9998Z"
         fill={color}
       />
-    </motion.svg>
+    </svg>
   );
 }
 
 ReactRouterLogo.defaultProps = {
   color: "#6E727E",
-  withAnimation: true,
 };
 
 export default ReactRouterLogo;
