@@ -1,4 +1,4 @@
-import { motion, useCycle, Variants } from "framer-motion";
+import { AnimatePresence, motion, useCycle, Variants } from "framer-motion";
 import MenuIcon from "@/components/icons/MenuIcon";
 import ArrowIcon from "@/components/icons/ArrowIcon";
 import NavLink from "@/components/NavLink";
@@ -43,6 +43,29 @@ const navbarList: Variants = {
   },
 };
 
+const headingTextList: Variants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.5,
+    },
+  },
+};
+
+const headingText: Variants = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+    },
+  },
+  hidden: {
+    y: -30,
+    opacity: 0,
+  },
+};
+
 export default function Home() {
   const [isNavOpen, toggleOpen] = useCycle(false, true);
 
@@ -57,7 +80,7 @@ export default function Home() {
           variants={navbarBg}
           className="absolute w-full bg-blue-100"
         />
-        <div className="absolute container px-2 py-4 sm:mx-auto grow flex flex-col">
+        <div className="absolute sm:relative container px-2 py-4 sm:mx-auto grow flex flex-col">
           <div className="flex items-center justify-between">
             <button onClick={() => toggleOpen()} type="button">
               <MenuIcon isOpen={isNavOpen} />
@@ -79,32 +102,54 @@ export default function Home() {
               <ArrowIcon isOpen={isNavOpen} />
             </motion.button>
           </div>
-          <motion.nav
-            variants={navbarList}
-            className="h-screen grid text-center md:text-left grow md:flex-col gap-2 sm:gap-4 place-content-center"
-          >
-            <NavLink title="Logowanie" href="test" />
-            <NavLink title="Rejestracja" href="test" />
-            <NavLink title="Regulamin" href="test" />
-            <NavLink title="Prywatność" href="test" />
-            <NavLink title="Reklamacje" href="test" />
-          </motion.nav>
+          <AnimatePresence>
+            {isNavOpen && (
+              <motion.nav
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    delay: 1,
+                  },
+                }}
+                variants={navbarList}
+                className="h-screen grid text-center md:text-left grow md:flex md:flex-col gap-2 sm:gap-4 place-content-center"
+              >
+                <NavLink title="Logowanie" href="test" />
+                <NavLink title="Rejestracja" href="test" />
+                <NavLink title="Regulamin" href="test" />
+                <NavLink title="Prywatność" href="test" />
+                <NavLink title="Reklamacje" href="test" />
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
-      <div
+      <motion.div
         className={`bg-blue-900 min-h-[100vh] md:fixed md:transition-transform ${
           isNavOpen
-            ? "md:scale-[55%] md:max-h-[100vh] md:overflow-hidden lg:scale-[65%] md:translate-x-[22.5%] lg:translate-x-[17.5%]"
+            ? "md:z-30 md:scale-[55%] md:max-h-[100vh] md:overflow-hidden lg:scale-[62%] md:translate-x-[22.5%] lg:translate-x-[19%]"
             : ""
         } md:left-0 md:top-0 md:bottom-0 overflow-y-auto overflow-x-hidden md:w-[100vw]`}
       >
         <header className="mt-32 xl:mt-36 mb-24 xl:mb-28 flex flex-col items-center">
-          <motion.h1 className="container text-center sm:max-w-[600px] md:max-w-[760px] lg:max-w-[1000px] xl:max-w-[1250px] 2xl:max-w-[1500px] sm:text-left mx-auto px-2 flex flex-col font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-11xl">
-            <motion.span>
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={headingTextList}
+            className="container text-center sm:max-w-[600px] md:max-w-[760px] lg:max-w-[1000px] xl:max-w-[1250px] 2xl:max-w-[1500px] sm:text-left mx-auto px-2 flex flex-col font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-11xl"
+          >
+            <motion.span variants={headingText}>
               Jak <span className="text-green-400">tworzyć</span>
             </motion.span>
-            <motion.span className="sm:ml-6 text-blue-400">strony</motion.span>
-            <motion.span className="sm:self-end">internetowe?</motion.span>
+            <motion.span
+              variants={headingText}
+              className="sm:ml-6 text-blue-400"
+            >
+              strony
+            </motion.span>
+            <motion.span variants={headingText} className="sm:self-end">
+              internetowe?
+            </motion.span>
           </motion.h1>
           <div className="mt-24 relative w-[100vw] overflow-y-hidden overflow-x-hidden flex flex-col items-center">
             <motion.div className="w-[125vw] flex space-x-2 md:space-x-4 lg:space-x-6 xl:space-x-8 justify-center">
@@ -209,7 +254,7 @@ export default function Home() {
           <p>Copyright cyc.agency © 2023</p>
           <p>All Rights Reserved</p>
         </footer>
-      </div>
+      </motion.div>
     </>
   );
 }
