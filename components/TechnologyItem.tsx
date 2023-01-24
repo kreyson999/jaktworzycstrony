@@ -14,9 +14,11 @@ function TechnologyItem({ logo, title, desc }: Props) {
   return (
     <motion.div
       initial="hidden"
-      animate={width < 1024 ? undefined : "visible"}
-      whileInView={width < 1024 ? "visible" : undefined}
-      viewport={width < 1024 ? { once: true, amount: 0.8 } : undefined}
+      whileInView="visible"
+      whileHover={{
+        backgroundColor: ["#191B22", "#22252F"],
+      }}
+      viewport={{ once: true, amount: width < 1024 ? 0.8 : 0.6 }}
       variants={modernTechnologiesItem}
       className="rounded-lg p-2 mx-2 flex flex-col items-center space-y-2 max-w-[300px] cursor-default"
     >

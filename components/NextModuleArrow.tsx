@@ -1,16 +1,29 @@
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 import useWindowSize from "@/hooks/useWindowSize";
 
 function NextModuleArrow({ isRight }: { isRight: boolean }) {
   const { width } = useWindowSize();
 
   return width >= 768 ? (
-    <div
-      className={`w-24 lg:w-32 xl:w-40 self-center absolute left-1/2 ${
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -30,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 1,
+      }}
+      className={`w-24 lg:w-32 xl:w-40 self-center absolute -bottom-[120px] lg:-bottom-[160px] xl:-bottom-[200px] ${
         isRight
-          ? "-bottom-28 lg:-bottom-40 translate-x-4 lg:translate-x-8 xl:-bottom-52"
-          : "-translate-x-28 lg:-translate-x-40 -bottom-28 lg:-bottom-40 xl:-bottom-52 xl:-translate-x-48"
+          ? "left-mdModulesRight lg:left-lgModulesRight xl:left-xlModulesRight"
+          : "left-mdModulesLeft lg:left-lgModulesLeft xl:left-xlModulesLeft"
       }`}
     >
       <Image
@@ -23,16 +36,30 @@ function NextModuleArrow({ isRight }: { isRight: boolean }) {
         width={160}
         height={160}
       />
-    </div>
+    </motion.div>
   ) : (
-    <div className="w-10 self-center my-4">
+    <motion.div
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      animate={{
+        opacity: 0,
+        y: 30,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.7,
+      }}
+      className="w-10 self-center my-4"
+    >
       <Image
         src="/assets/arrow_mobile.svg"
         alt="Następny moduł"
         width={128}
         height={128}
       />
-    </div>
+    </motion.div>
   );
 }
 

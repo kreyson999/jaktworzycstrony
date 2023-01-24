@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   text: string;
@@ -23,7 +24,21 @@ function OfferListItem({ text }: Props) {
 
 function OfferContainer() {
   return (
-    <div className="max-w-[400px] sm:max-w-[500px] mx-auto flex flex-col rounded-lg py-4 px-2 sm:px-4 sm:py-8 border drop-shadow-gray border-gray-700">
+    <motion.div
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      initial={{
+        opacity: 0,
+        y: 50,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.8,
+      }}
+      className="max-w-[400px] sm:max-w-[500px] mx-auto flex flex-col rounded-lg py-4 px-2 sm:px-4 sm:py-8 border drop-shadow-gray border-gray-700"
+    >
       <p className="uppercase text-lg sm:text-xl font-semibold text-purple-400">
         Cena to tylko
       </p>
@@ -41,7 +56,7 @@ function OfferContainer() {
       >
         Kup teraz
       </button>
-    </div>
+    </motion.div>
   );
 }
 

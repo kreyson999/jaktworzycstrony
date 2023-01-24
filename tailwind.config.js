@@ -27,6 +27,14 @@ module.exports = {
         },
         gold: "#D3B752"
       },
+      spacing: {
+        mdModulesLeft: "calc(50% - 120px)", 
+        mdModulesRight: "calc(50% + 20px)", 
+        lgModulesLeft: "calc(50% - 160px)", 
+        lgModulesRight: "calc(50% + 30px)", 
+        xlModulesLeft: "calc(50% - 200px)", 
+        xlModulesRight: "calc(50% + 40px)", 
+      },
       fontSize: {
         "10xl": "10rem",
         "11xl": "12rem"

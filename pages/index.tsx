@@ -18,7 +18,6 @@ import {
   modernTechnologiesList,
   navbarBg,
   navbarList,
-  sectionAnimation,
 } from "@/utils/indexAnimations";
 
 export default function Home() {
@@ -88,6 +87,8 @@ export default function Home() {
       >
         <header className="mt-32 xl:mt-36 mb-24 xl:mb-28 flex flex-col items-center">
           <motion.h1
+            initial="hidden"
+            animate="visible"
             variants={headingTextList}
             className="container text-center sm:max-w-[600px] md:max-w-[760px] lg:max-w-[1000px] xl:max-w-[1250px] 2xl:max-w-[1500px] sm:text-left mx-auto px-2 flex flex-col font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-11xl"
           >
@@ -106,9 +107,21 @@ export default function Home() {
           </motion.h1>
         </header>
         <motion.p
-          whileInView="visible"
-          initial="hidden"
-          variants={sectionAnimation}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: {
+              type: "spring",
+              delay: 1.5,
+            },
+          }}
+          viewport={{
+            once: true,
+          }}
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
           className="container mx-auto px-2 font-semibold text-lg text-center sm:text-xl lg:text-2xl 2xl:text-3xl"
         >
           Kurs tłumaczy,{" "}
