@@ -10,11 +10,11 @@ const slides = [
   },
   {
     src: "/assets/appgallery/sportblog.png",
-    desc: "Aplikacja do sprawdzania aktualnych cen kryptowalut, które będą pobierane z tak zwanego API",
+    desc: "Własny blog internetowy wspomagany przez modernistyczny system zarządzania treścią.",
   },
   {
     src: "/assets/appgallery/supermessages.png",
-    desc: "Aplikacja do sprawdzania aktualnych cen kryptowalut, które będą pobierane z tak zwanego API",
+    desc: "Aplikacja do wysyłania wiadomości ze znajomymi.",
   },
 ];
 

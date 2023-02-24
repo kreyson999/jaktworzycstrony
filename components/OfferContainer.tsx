@@ -44,18 +44,19 @@ function OfferContainer() {
       </p>
       <h3 className="mt-2 font-black text-5xl sm:text-6xl">39,99 PLN</h3>
       <ul className="mt-8 flex flex-col space-y-2">
-        <OfferListItem text="Lorem ipsum dolor sit amet consectetur adipisicing." />
-        <OfferListItem text="Lorem ipsum dolor sit amet consectetur adipisicing." />
-        <OfferListItem text="Lorem ipsum dolor sit amet consectetur adipisicing." />
-        <OfferListItem text="Lorem ipsum dolor sit amet consectetur adipisicing." />
-        <OfferListItem text="Lorem ipsum dolor sit amet consectetur adipisicing." />
+        <OfferListItem text="6 godzin treści wideo" />
+        <OfferListItem text="Dożywotni dostęp do kursu" />
+        <OfferListItem text="Dostęp na urządzeniach mobilnych i telewizorach" />
+        <OfferListItem text="Certyfikat ukończenia" />
+        <OfferListItem text="30 dni na zwrot" />
       </ul>
-      <button
+      <a
+        href="https://www.udemy.com/course/praktyczny-kurs-tworzenia-stron-internetowych/"
         type="button"
-        className="mt-8 rounded-lg py-2 px-2 bg-blue-400 text-xl md:text-2xl font-bold"
+        className="text-center mt-8 rounded-lg py-2 px-2 bg-blue-400 text-xl md:text-2xl font-bold"
       >
         Kup teraz
-      </button>
+      </a>
     </motion.div>
   );
 }
