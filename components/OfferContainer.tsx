@@ -42,7 +42,7 @@ function OfferContainer() {
       <p className="uppercase text-lg sm:text-xl font-semibold text-purple-400">
         Cena to tylko
       </p>
-      <h3 className="mt-2 font-black text-5xl sm:text-6xl">39,99 PLN</h3>
+      <h3 className="mt-2 font-black text-5xl sm:text-6xl">49,99 PLN</h3>
       <ul className="mt-8 flex flex-col space-y-2">
         <OfferListItem text="6 godzin treści wideo" />
         <OfferListItem text="Dożywotni dostęp do kursu" />
@@ -51,8 +51,7 @@ function OfferContainer() {
         <OfferListItem text="30 dni na zwrot" />
       </ul>
       <a
-        href="https://www.udemy.com/course/praktyczny-kurs-tworzenia-stron-internetowych/"
-        type="button"
+        href="https://www.udemy.com/course/praktyczny-kurs-tworzenia-stron-internetowych/?referralCode=780A7752A1EFFBA7DBC6"
         className="text-center mt-8 rounded-lg py-2 px-2 bg-blue-400 text-xl md:text-2xl font-bold"
       >
         Kup teraz
